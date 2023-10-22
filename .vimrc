@@ -1,28 +1,35 @@
 call plug#begin()
 Plug 'arcticicestudio/nord-vim'
-Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ycm-core/YouCompleteMe'
-Plug 'ianding1/leetcode.vim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'dense-analysis/ale'
+Plug 'github/copilot.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'morhetz/gruvbox'
+Plug 'posva/vim-vue'
+Plug 'preservim/nerdtree'
+Plug 'takac/vim-hardtime'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
-Plug 'dense-analysis/ale'
 Plug 'tpope/vim-rails'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'tpope/vim-fugitive'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
-nnoremap <leader>n :NERDTreeFocus<CR>
+" Copilot TAB mapping
+imap <silent><script><expr> <Tab> copilot#Accept(<Tab>)
+
+autocmd vimenter * ++nested colorscheme catppuccin-mocha
+
+" NERDTree
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-nnoremap <leader>ll :LeetCodeList<cr>
-nnoremap <leader>lt :LeetCodeTest<cr>
-nnoremap <leader>ls :LeetCodeSubmit<cr>
-nnoremap <leader>li :LeetCodeSignIn<cr>
+nnoremap <leader>n :NERDTreeFocus<CR>
 
+" FZF
 function! FZFOpen(command_str)
   if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
     exe "normal! \<c-w>\<c-w>"
@@ -33,17 +40,24 @@ endfunction
 nnoremap <silent> <C-b> :call FZFOpen(':Buffers')<CR>
 nnoremap <silent> <C-g>g :call FZFOpen(':Ag')<CR>
 nnoremap <silent> <C-g>c :call FZFOpen(':Commands')<CR>
-nnoremap <silent> <C-g>l :call FZFOpen(':BLines')<CR>
+nnoremap <silent> <C-f> :call FZFOpen(':Ag')<CR>
 nnoremap <silent> <C-p> :call FZFOpen(':Files')<CR>
 
-autocmd vimenter * ++nested colorscheme gruvbox
+let &t_ut=''
+
+" Hardtime settings
+let g:hardtime_default_on = 0
+let g:hardtime_ignore_buffer_patterns = [ "NERD.*" ]
+
+let g:lightline = {
+      \ 'colorscheme': 'catppuccin',
+      \ }
 
 set bg=dark
-set guifont=FiraCode
 set encoding=UTF-8
+set laststatus=2
+set nu rnu
 set relativenumber
-let g:leetcode_browser = 'firefox'
-let g:leetcode_solution_filetype = 'ruby'
 
 abbreviate hma has_many_attached
 abbreviate hm has_many 
