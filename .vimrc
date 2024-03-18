@@ -2,7 +2,6 @@ call plug#begin()
 Plug 'arcticicestudio/nord-vim'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'dense-analysis/ale'
-Plug 'github/copilot.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -21,8 +20,6 @@ call plug#end()
 
 " Copilot TAB mapping
 imap <silent><script><expr> <Tab> copilot#Accept(<Tab>)
-
-autocmd vimenter * ++nested colorscheme catppuccin-mocha
 
 " NERDTree
 nnoremap <C-n> :NERDTree<CR>
@@ -49,9 +46,8 @@ let &t_ut=''
 let g:hardtime_default_on = 0
 let g:hardtime_ignore_buffer_patterns = [ "NERD.*" ]
 
-let g:lightline = {
-      \ 'colorscheme': 'catppuccin',
-      \ }
+:colorscheme catppuccin
+let g:lightline = {'colorscheme': 'catppuccin' }
 
 set bg=dark
 set encoding=UTF-8
