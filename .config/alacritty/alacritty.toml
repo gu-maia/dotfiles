@@ -1,0 +1,9 @@
+# import = [ "~/.config/alacritty/catppuccin/catppuccin-mocha.yml" ]
+
+[shell]
+program = "/bin/bash"
+args = [ "-l", "-c", "tmux attach || tmux" ]
+
+[font]
+normal = { family = "FiraCode Nerd Font", style = "Regular" } 
+size = 13.0
